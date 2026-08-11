@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local agent skills / launch config (not needed on Vercel)
+/.agents
+/.claude
+skills-lock.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
