@@ -1,5 +1,5 @@
 // CONTENTFUL MAP → content type: "StatsBar"
-// Fields: stats (List of {label, value}) — repeatable
+// Fields: stats (List of {label, value}) - repeatable
 
 const STATS = [
   { value: "120+", label: "Designers in network" },

@@ -8,7 +8,7 @@ import StickerPeel from "./StickerPeel";
 export default function StickerStack() {
   return (
     <div className="absolute inset-0 z-20">
-      {/* Purple 'create with purpose' — right beside "Grow together" */}
+      {/* Purple 'create with purpose' - right beside "Grow together" */}
       <StickerPeel
         imageSrc="/sticker-purpose.png"
         width={200}
@@ -19,7 +19,7 @@ export default function StickerStack() {
         className="!left-0 md:!left-2 !top-[38%] md:!top-[40%]"
       />
 
-      {/* Blue 'crafting experience' — right side, large */}
+      {/* Blue 'crafting experience' - right side, large */}
       <StickerPeel
         imageSrc="/sticker-crafting.png"
         width={400}
@@ -30,7 +30,7 @@ export default function StickerStack() {
         className="!right-0 md:!right-8 !left-auto !top-2 md:!top-4"
       />
 
-      {/* Green hands — just above "bold" word, straight */}
+      {/* Green hands - just above "bold" word, straight */}
       <StickerPeel
         imageSrc="/sticker-hands.png"
         width={190}

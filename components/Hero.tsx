@@ -17,7 +17,7 @@ export default function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* Stickers layer — absolutely positioned floating over hero */}
+      {/* Stickers layer - absolutely positioned floating over hero */}
       <StickerStack />
 
       {/* Text layer */}

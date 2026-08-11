@@ -1,5 +1,5 @@
 // CONTENTFUL MAP → content type: "BenefitsGrid"
-// Fields: eyebrow, headline, subheadline, benefits (List of {icon, title, body, pointerColor}) — repeatable
+// Fields: eyebrow, headline, subheadline, benefits (List of {icon, title, body, pointerColor}) - repeatable
 
 import { Pointer } from "./ui/pointer";
 
@@ -8,13 +8,13 @@ const BENEFITS = [
     icon: "$",
     title: "Revenue share",
     body: "Get paid on every brief. Rising partners earn a set share. Trusted and Signature earn more per project.",
-    color: "#22c55e", // green — money
+    color: "#22c55e", // green - money
   },
   {
     icon: "★",
     title: "Priority support",
     body: "Direct line to our engineering and design team. Slack channel, monthly office hours, fast issue resolution.",
-    color: "#f59e0b", // amber — star
+    color: "#f59e0b", // amber - star
   },
   {
     icon: "→",
@@ -61,7 +61,7 @@ export default function BenefitsGrid() {
               key={b.title}
               className="relative bg-brand-lavender rounded-2xl p-5 flex flex-col gap-3 hover:shadow-lg transition"
             >
-              {/* Per-card custom cursor — appears when hovering this specific card */}
+              {/* Per-card custom cursor - appears when hovering this specific card */}
               <Pointer>
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center text-white font-black text-lg shadow-lg"

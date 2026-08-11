@@ -1,5 +1,5 @@
 // CONTENTFUL MAP → content type: "PortfolioStrip"
-// Fields: eyebrow, headline, items (List of {image (Media), caption, designerName}) — repeatable
+// Fields: eyebrow, headline, items (List of {image (Media), caption, designerName}) - repeatable
 
 const ITEMS = [
   { caption: "Neon Summit '26", designer: "Priya M." },

@@ -10,7 +10,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Design Event Websites & Brand Kits | Arrived Designer Partners",
   description:
-    "Join Arrived's designer network. Get matched to event hosts who need brand kits, invites, signage, and custom design work — with real budgets and clear scope.",
+    "Join Arrived's designer network. Get matched to event hosts who need brand kits, invites, signage, and custom design work, with real budgets and clear scope.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -2,7 +2,7 @@
 
 // CONTENTFUL MAP → content type: "ProcessSteps"
 // Fields: eyebrow, headline, subheadline, ctaLabel, ctaLink,
-//         steps (List of {number, title, body}) — repeatable
+//         steps (List of {number, title, body}) - repeatable
 // Interaction: 2-column layout, left intro + CTA, right accordion of steps
 
 import { useState } from "react";
@@ -16,7 +16,7 @@ const STEPS = [
   {
     number: 2,
     title: "Check your inbox",
-    body: "You'll get a welcome email with everything you need — modules, docs, and next steps.",
+    body: "You'll get a welcome email with everything you need: modules, docs, and next steps.",
   },
   {
     number: 3,
@@ -41,7 +41,7 @@ export default function ProcessSteps() {
   return (
     <section className="w-full px-6 py-20">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
-        {/* LEFT — intro */}
+        {/* LEFT - intro */}
         <div>
           <span className="pill mb-6 inline-block">How it works</span>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
@@ -49,7 +49,7 @@ export default function ProcessSteps() {
           </h2>
           <p className="mt-6 text-base md:text-lg text-brand-muted max-w-md">
             Five steps between signing up and getting paid to design. Move at
-            your own pace — most partners finish onboarding in under a week.
+            your own pace. Most partners finish onboarding in under a week.
           </p>
           <a
             href="#apply"
@@ -60,7 +60,7 @@ export default function ProcessSteps() {
           </a>
         </div>
 
-        {/* RIGHT — accordion */}
+        {/* RIGHT - accordion */}
         <div className="flex flex-col gap-2">
           {STEPS.map((s, i) => {
             const isOpen = open === i;

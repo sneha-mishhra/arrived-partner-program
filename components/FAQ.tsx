@@ -1,5 +1,5 @@
 // CONTENTFUL MAP → content type: "FAQ"
-// Fields: eyebrow, headline, items (List of {question, answer (Long text)}) — repeatable
+// Fields: eyebrow, headline, items (List of {question, answer (Long text)}) - repeatable
 
 "use client";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { useState } from "react";
 const ITEMS = [
   {
     q: "Do I need to know how to code?",
-    a: "No. Arrived's designer platform is fully visual — drag, drop, and design. If you can use Figma, you can use Arrived.",
+    a: "No. Arrived's designer platform is fully visual. Drag, drop, and design. If you can use Figma, you can use Arrived.",
   },
   {
     q: "How much can I earn?",

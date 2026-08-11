@@ -1,5 +1,5 @@
 // CONTENTFUL MAP → content type: "Footer"
-// Fields: copyrightText, links (List of {label, url}) — repeatable
+// Fields: copyrightText, links (List of {label, url}) - repeatable
 
 export default function Footer() {
   return (
