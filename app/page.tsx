@@ -3,7 +3,6 @@
 // Each component maps 1:1 to a future Contentful content type.
 
 import Hero from "@/components/Hero";
-import FeatureCard from "@/components/FeatureCard";
 import BenefitsGrid from "@/components/BenefitsGrid";
 import ProcessSteps from "@/components/ProcessSteps";
 import DesignJamCard from "@/components/DesignJamCard";
@@ -15,7 +14,6 @@ export default function Page() {
   return (
     <main className="w-full">
       <Hero />
-      <FeatureCard />
       <BenefitsGrid />
       <ProcessSteps />
       <DesignJamCard />
