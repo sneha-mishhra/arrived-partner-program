@@ -4,6 +4,7 @@
 // backgroundImage (Media), stickers (List of {image, rotate, width, top, left, right})
 
 import StickerStack from "./StickerStack";
+import { PointerHighlight } from "./ui/pointer-highlight";
 
 export default function Hero() {
   return (
@@ -27,7 +28,15 @@ export default function Hero() {
           <br />
           Earn more.
           <br />
-          <span className="text-brand-purple-2">Grow together.</span>
+          <PointerHighlight
+            rectangleClassName="border-brand-navy"
+            pointerClassName="text-brand-navy h-6 w-6"
+            containerClassName="inline-block"
+          >
+            <span className="text-brand-purple-2 relative z-10 px-1">
+              Grow together.
+            </span>
+          </PointerHighlight>
         </h1>
         <p className="mt-8 text-base md:text-lg text-brand-muted max-w-xl">
           The event site is the first taste of the vibe. Get paid to design it.
