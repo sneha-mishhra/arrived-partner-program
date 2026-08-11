@@ -38,7 +38,8 @@ const BENEFITS = [
 
 export default function BenefitsGrid() {
   return (
-    <section className="w-full px-6 py-20">
+    <section className="relative w-full px-6 py-20">
+      <Pointer className="stroke-white text-brand-purple" />
       <div className="max-w-5xl mx-auto text-center">
         <span className="pill mb-6 inline-block">Partner benefits</span>
         <h2 className="text-3xl md:text-5xl font-black tracking-tight max-w-2xl mx-auto">
@@ -49,8 +50,7 @@ export default function BenefitsGrid() {
           work.
         </p>
 
-        <div className="relative mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
-          <Pointer className="stroke-white text-brand-purple" />
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
           {BENEFITS.map((b) => (
             <div
               key={b.title}
