@@ -4,7 +4,6 @@
 // backgroundImage (Media), stickers (List of {image, rotate, width, top, left, right})
 
 import StickerStack from "./StickerStack";
-import HeroClouds from "./HeroClouds";
 
 export default function Hero() {
   return (
@@ -19,9 +18,6 @@ export default function Hero() {
     >
       {/* Stickers layer - absolutely positioned floating over hero */}
       <StickerStack />
-
-      {/* Cloud band straddling the hero bottom edge into next section */}
-      <HeroClouds />
 
       {/* Text layer */}
       <div className="relative z-40 max-w-4xl mx-auto text-left pl-20 md:pl-24">
