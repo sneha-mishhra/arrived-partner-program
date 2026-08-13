@@ -23,11 +23,11 @@ export default function Hero() {
       <div className="relative z-40 max-w-4xl mx-auto text-left pl-20 md:pl-24">
         <span className="pill mb-6 inline-block">For designers</span>
         <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05]">
-          Design bold.
+          Design.
           <br />
-          Earn more.
+          Build.
           <br />
-          <span className="text-brand-purple-2">Grow together.</span>
+          <span className="text-brand-purple-2">Earn.</span>
         </h1>
         <p className="mt-8 text-base md:text-lg text-brand-muted max-w-xl">
           The event site is the first taste of the vibe. Get paid to design it.
