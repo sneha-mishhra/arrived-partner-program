@@ -4,12 +4,12 @@
 // backgroundImage (Media), stickers (List of {image, rotate, width, top, left, right})
 
 import StickerStack from "./StickerStack";
-import { PointerHighlight } from "./ui/pointer-highlight";
+import HeroClouds from "./HeroClouds";
 
 export default function Hero() {
   return (
     <section
-      className="relative w-full py-24 md:py-32 px-6 rounded-b-3xl"
+      className="relative w-full py-24 md:py-32 px-6"
       style={{
         backgroundImage: "url('/hero-bg.png')",
         backgroundSize: "cover",
@@ -20,6 +20,9 @@ export default function Hero() {
       {/* Stickers layer - absolutely positioned floating over hero */}
       <StickerStack />
 
+      {/* Cloud band straddling the hero bottom edge into next section */}
+      <HeroClouds />
+
       {/* Text layer */}
       <div className="relative z-40 max-w-4xl mx-auto text-left pl-20 md:pl-24">
         <span className="pill mb-6 inline-block">For designers</span>
@@ -28,15 +31,7 @@ export default function Hero() {
           <br />
           Earn more.
           <br />
-          <PointerHighlight
-            rectangleClassName="border-brand-navy"
-            pointerClassName="text-brand-navy h-6 w-6"
-            containerClassName="inline-block"
-          >
-            <span className="text-brand-purple-2 relative z-10 px-1">
-              Grow together.
-            </span>
-          </PointerHighlight>
+          <span className="text-brand-purple-2">Grow together.</span>
         </h1>
         <p className="mt-8 text-base md:text-lg text-brand-muted max-w-xl">
           The event site is the first taste of the vibe. Get paid to design it.
