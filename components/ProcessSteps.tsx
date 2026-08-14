@@ -1,11 +1,7 @@
-"use client";
-
 // CONTENTFUL MAP → content type: "ProcessSteps"
 // Fields: eyebrow, headline, subheadline, ctaLabel, ctaLink,
 //         steps (List of {number, title, body}) - repeatable
-// Interaction: 2-column layout, left intro + CTA, right accordion of steps
-
-import { useState } from "react";
+// Layout: 2-column, left intro + CTA, right stack of numbered cards (always visible)
 
 const STEPS = [
   {
@@ -36,89 +32,50 @@ const STEPS = [
 ];
 
 export default function ProcessSteps() {
-  const [open, setOpen] = useState<number>(0);
-
   return (
     <section className="w-full px-6 py-20">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
         {/* LEFT - intro */}
         <div>
-          <span className="pill mb-6 inline-block">How it works</span>
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+          <span className="text-xs md:text-sm font-mono uppercase tracking-widest text-brand-purple mb-4 inline-block">
+            Onboarding is easy. And we can help.
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight text-brand-navy">
             Your path to your first brief.
           </h2>
           <p className="mt-6 text-base md:text-lg text-brand-muted max-w-md">
             Five steps between signing up and getting paid to design. Move at
             your own pace. Most partners finish onboarding in under a week.
           </p>
-          <a
-            href="#apply"
-            className="mt-8 inline-flex items-center gap-2 bg-brand-navy text-white text-sm font-semibold px-6 py-3 rounded-full hover:bg-brand-navy-2 transition"
-          >
-            Get started
-            <span>→</span>
-          </a>
         </div>
 
-        {/* RIGHT - accordion */}
-        <div className="flex flex-col gap-2">
-          {STEPS.map((s, i) => {
-            const isOpen = open === i;
-            return (
-              <button
-                key={s.number}
-                onClick={() => setOpen(isOpen ? -1 : i)}
-                className={`
-                  text-left rounded-2xl p-5 transition-all duration-300
-                  ${
-                    isOpen
-                      ? "bg-brand-navy text-white shadow-lg"
-                      : "bg-brand-lavender text-brand-navy hover:bg-brand-lavender-2"
-                  }
-                `}
-              >
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`
-                      flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center
-                      font-black text-base transition-all duration-300
-                      ${
-                        isOpen
-                          ? "bg-brand-purple-2 text-white"
-                          : "bg-brand-purple text-white"
-                      }
-                    `}
-                  >
-                    {s.number}
-                  </div>
-                  <h3 className="font-bold text-lg md:text-xl flex-1">
-                    {s.title}
-                  </h3>
-                  <span
-                    className={`text-2xl leading-none transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
-                  >
-                    +
-                  </span>
-                </div>
-                <div
-                  className={`
-                    overflow-hidden transition-all duration-300 ease-out
-                    ${isOpen ? "max-h-40 mt-4 opacity-100" : "max-h-0 opacity-0"}
-                  `}
+        {/* RIGHT - numbered step cards, always visible */}
+        <div className="flex flex-col gap-3">
+          {STEPS.map((s, i) => (
+            <div
+              key={s.number}
+              className="bg-white border border-brand-lavender-2 rounded-2xl p-6 md:p-7 hover:border-brand-purple/40 transition"
+            >
+              <div className="text-2xl md:text-3xl font-black text-brand-purple mb-3">
+                {String(s.number).padStart(2, "0")}
+              </div>
+              <h3 className="font-bold text-lg md:text-xl text-brand-navy">
+                {s.title}
+              </h3>
+              <p className="mt-2 text-sm md:text-base text-brand-muted leading-relaxed">
+                {s.body}
+              </p>
+              {i === 0 && (
+                <a
+                  href="#apply"
+                  className="mt-5 inline-flex items-center gap-2 bg-brand-navy text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-brand-navy-2 transition"
                 >
-                  <p
-                    className={`text-sm md:text-base leading-relaxed pl-14 ${
-                      isOpen ? "text-white/80" : "text-brand-muted"
-                    }`}
-                  >
-                    {s.body}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
+                  Get started
+                  <span>→</span>
+                </a>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
