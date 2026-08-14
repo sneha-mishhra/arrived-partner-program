@@ -41,7 +41,7 @@ export default function Hero() {
             Apply to become a partner
           </a>
           <a
-            href="#jams"
+            href="#apply"
             className="bg-transparent border border-brand-navy text-brand-navy text-sm font-semibold px-6 py-3 rounded-full hover:bg-white transition"
           >
             Join the next design jam

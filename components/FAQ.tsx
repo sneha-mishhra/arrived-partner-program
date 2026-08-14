@@ -38,9 +38,6 @@ export default function FAQ() {
     <section className="w-full px-6 py-20">
       <div className="max-w-3xl mx-auto text-center">
         <span className="pill mb-6 inline-block">FAQ</span>
-        <h2 className="text-3xl md:text-5xl font-black tracking-tight max-w-2xl mx-auto">
-          The stuff designers actually ask.
-        </h2>
       </div>
 
       <div className="max-w-3xl mx-auto mt-10 flex flex-col gap-2">
