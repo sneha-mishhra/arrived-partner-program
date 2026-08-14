@@ -6,28 +6,28 @@ import { useState } from "react";
 
 const ITEMS = [
   {
-    q: "Do I need to know how to code?",
-    a: "No. Arrived's designer platform is fully visual. Drag, drop, and design. If you can use Figma, you can use Arrived.",
+    q: "Is there a fee to join the program?",
+    a: "No, joining is completely free. If selected, we'll pair you with Arrived's customers so you can design event pages for them and earn on every project.",
   },
   {
-    q: "How much can I earn?",
-    a: "Typical projects run $800–$4,500. Top partners bring in $10k+/month. You set your rate; we surface you to the right hosts.",
+    q: "I'm a vibe coder, can I join?",
+    a: "Yes, absolutely. We have an API you can plug into your AI workflow to generate beautiful event pages using Arrived.",
   },
   {
-    q: "How long does certification take?",
-    a: "Most designers finish the six modules and prove build in 5–7 days. You move at your own pace.",
+    q: "How long is the onboarding process?",
+    a: "Usually about a week. You register, work through our modules, and apply for Pro access. Most partners are live and taking briefs within 7 days.",
   },
   {
-    q: "Can I keep freelancing outside Arrived?",
-    a: "Yes. There's no exclusivity. Partner briefs are extra flow on top of your existing work.",
+    q: "Is there a deadline for building my custom page?",
+    a: "Yes. We get a lot of applications and review designers on a rolling basis. You'll need to finish your custom page in a day. Pick the day that works for you and ask our team for access before that.",
   },
   {
-    q: "What if I don't get in?",
-    a: "We give feedback and open reapplications every 90 days. Design jams are also a way to prove yourself and skip the queue.",
+    q: "Can I build a custom page on the free plan?",
+    a: "No. Custom pages are only for Pro users. Designers need to email our team for access, and we'll grant you a one-day Pro window to build.",
   },
   {
-    q: "What kind of designers are you looking for?",
-    a: "Brand designers, graphic designers, and visual identity specialists with a portfolio that shows systems, not just one-off assets.",
+    q: "Who do I contact for questions?",
+    a: "Email our team at partners@teamhappily.com.",
   },
 ];
 

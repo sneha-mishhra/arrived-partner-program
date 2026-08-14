@@ -21,7 +21,6 @@ export default function Hero() {
 
       {/* Text layer */}
       <div className="relative z-40 max-w-4xl mx-auto text-left pl-20 md:pl-24">
-        <span className="pill mb-6 inline-block">For designers</span>
         <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05]">
           Design.
           <br />
