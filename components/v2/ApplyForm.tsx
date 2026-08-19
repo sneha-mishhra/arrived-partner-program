@@ -5,7 +5,7 @@
 // go to the same server action and land in the event's attendee list.
 // Pending state: button disables, label swaps, spinner shows, aria-busy set.
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 import {
   type RegistrationState,
@@ -24,6 +24,131 @@ const HALF_WIDTH = new Set(["firstName", "lastName", "title", "phoneNumber"]);
 
 const fieldClass =
   "w-full rounded-[var(--p-radius-pill)] border border-(--p-line-strong) bg-(--p-bg) px-[var(--p-space-2)] py-[0.7rem] text-[length:var(--p-text-sm)] text-(--p-ink) outline-none transition-colors duration-[var(--p-duration-fast)] ease-(--p-ease) focus:border-(--p-accent)";
+
+const RESOURCES = [
+  {
+    label: "About the Arrived platform",
+    href: "https://docs.google.com/document/d/1baqWyG_txn1vbBS8xuTxg90xu-OxULNDEeeaJg13DBY/edit?usp=sharing",
+  },
+  {
+    label: "Assignment brief",
+    href: "https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Partner%20Assignment.pdf",
+  },
+];
+
+const SHARE_TEXT = "Arrived is looking for design partners — worth a look.";
+
+function shareLinks(url: string) {
+  return [
+    {
+      name: "X",
+      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(url)}`,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.5 22H1.4l8.1-9.3L1 2h7l4.9 6z" />
+        </svg>
+      ),
+    },
+    {
+      name: "LinkedIn",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <rect x="3" y="3" width="18" height="18" rx="3" />
+          <line x1="7.5" y1="10.5" x2="7.5" y2="16.5" />
+          <circle cx="7.5" cy="7.2" r="0.2" fill="currentColor" />
+          <path d="M11 16.5v-3.7c0-1.5 1-2.3 2.2-2.3 1.2 0 1.8.8 1.8 2.3v3.7" />
+          <line x1="11" y1="10.5" x2="11" y2="16.5" />
+        </svg>
+      ),
+    },
+    {
+      name: "Email",
+      href: `mailto:?subject=${encodeURIComponent("Arrived design partner program")}&body=${encodeURIComponent(`${SHARE_TEXT} ${url}`)}`,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m4 7 8 6 8-6" />
+        </svg>
+      ),
+    },
+  ];
+}
+
+function SuccessMessage({
+  title,
+  body,
+}: {
+  title?: string | null;
+  body?: string | null;
+}) {
+  // Read lazily so the share links point at wherever this page actually
+  // lives, rather than a guessed domain baked in at build time. Guarded for
+  // SSR, where this component doesn't render in practice (state.ok only
+  // flips true after a client-side form submission).
+  const [pageUrl] = useState(() =>
+    typeof window !== "undefined" ? window.location.href : "",
+  );
+
+  return (
+    <div className="py-[var(--p-space-2)] text-center">
+      <h3 className="text-[length:var(--p-text-xl)] font-[var(--p-weight-medium)] text-(--p-ink)">
+        {title || "Thank you for your interest!"}
+      </h3>
+      <p className="mt-[var(--p-space-1)] text-[length:var(--p-text-sm)] text-(--p-muted)">
+        {body || "Your application is in. Here's what to look at next."}
+      </p>
+
+      <div className="mt-[var(--p-space-3)] flex flex-col gap-[var(--p-space-1)]">
+        {RESOURCES.map((resource) => (
+          <a
+            key={resource.href}
+            href={resource.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-[var(--p-radius-lg)] border border-(--p-line-strong) px-[var(--p-space-2)] py-[var(--p-space-1)] text-[length:var(--p-text-sm)] font-[var(--p-weight-medium)] text-(--p-ink) transition-colors duration-[var(--p-duration-fast)] ease-(--p-ease) hover:bg-(--p-surface)"
+          >
+            {resource.label} ↗
+          </a>
+        ))}
+      </div>
+
+      <p className="mt-[var(--p-space-3)] text-[length:var(--p-text-sm)] text-(--p-muted)">
+        Once you have gone through those, email us at{" "}
+        <a
+          href="mailto:designpartners@teamhappily.com"
+          className="text-(--p-ink) underline decoration-(--p-line-strong) underline-offset-2"
+        >
+          designpartners@teamhappily.com
+        </a>{" "}
+        for Pro access — custom event builds can only be done using our Pro
+        feature.
+      </p>
+
+      <p className="mt-[var(--p-space-2)] text-[length:var(--p-text-sm)] text-(--p-muted)">
+        We look forward to seeing what you build, and to working with you.
+      </p>
+
+      <div className="mt-[var(--p-space-4)] border-t border-(--p-line) pt-[var(--p-space-3)]">
+        <p className="p-label">Know someone who would be interested?</p>
+        <div className="mt-[var(--p-space-2)] flex justify-center gap-[var(--p-space-2)]">
+          {shareLinks(pageUrl).map((share) => (
+            <a
+              key={share.name}
+              href={share.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Share on ${share.name}`}
+              className="flex size-[38px] items-center justify-center rounded-full border border-(--p-line-strong) text-(--p-muted) transition-all duration-[var(--p-duration-fast)] ease-(--p-ease) hover:-translate-y-[3px] hover:border-(--p-accent) hover:text-(--p-accent)"
+            >
+              <span className="size-[16px]">{share.icon}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Field({ field }: { field: PublicFormField }) {
   const label = field.required ? `${field.title} *` : field.title;
@@ -131,17 +256,7 @@ export default function ApplyForm({
   }
 
   if (state.ok) {
-    return (
-      <div className="py-[var(--p-space-3)] text-center">
-        <h3 className="text-[length:var(--p-text-xl)] font-[var(--p-weight-medium)] text-(--p-ink)">
-          {successTitle || "Thank you"}
-        </h3>
-        <p className="mt-[var(--p-space-1)] text-[length:var(--p-text-sm)] text-(--p-muted)">
-          {successBody ||
-            "Your application is in. Watch your inbox for the welcome email with your modules and next steps."}
-        </p>
-      </div>
-    );
+    return <SuccessMessage title={successTitle} body={successBody} />;
   }
 
   return (
