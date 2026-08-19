@@ -5,7 +5,7 @@
 // go to the same server action and land in the event's attendee list.
 // Pending state: button disables, label swaps, spinner shows, aria-busy set.
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 
 import {
   type RegistrationState,
@@ -18,6 +18,8 @@ import type {
   PublicFormField,
 } from "@/lib/happily/types";
 
+import ResourceCards, { type Resource } from "./ResourceCards";
+
 const initialState: RegistrationState = { ok: false };
 
 const HALF_WIDTH = new Set(["firstName", "lastName", "title", "phoneNumber"]);
@@ -25,14 +27,16 @@ const HALF_WIDTH = new Set(["firstName", "lastName", "title", "phoneNumber"]);
 const fieldClass =
   "w-full rounded-[var(--p-radius-pill)] border border-(--p-line-strong) bg-(--p-bg) px-[var(--p-space-2)] py-[0.7rem] text-[length:var(--p-text-sm)] text-(--p-ink) outline-none transition-colors duration-[var(--p-duration-fast)] ease-(--p-ease) focus:border-(--p-accent)";
 
-const RESOURCES = [
+const RESOURCES: Resource[] = [
   {
     label: "About the Arrived platform",
     href: "https://docs.google.com/document/d/1baqWyG_txn1vbBS8xuTxg90xu-OxULNDEeeaJg13DBY/edit?usp=sharing",
+    image: "/platform-module.png",
   },
   {
     label: "Assignment brief",
     href: "https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Partner%20Assignment.pdf",
+    image: "/partner-assignment.png",
   },
 ];
 
@@ -82,13 +86,16 @@ function SuccessMessage({
   title?: string | null;
   body?: string | null;
 }) {
-  // Read lazily so the share links point at wherever this page actually
-  // lives, rather than a guessed domain baked in at build time. Guarded for
-  // SSR, where this component doesn't render in practice (state.ok only
-  // flips true after a client-side form submission).
-  const [pageUrl] = useState(() =>
-    typeof window !== "undefined" ? window.location.href : "",
-  );
+  // Starts empty on both server and client so the two renders match, then
+  // fills in after mount — the share links need wherever this page is
+  // actually hosted, which isn't knowable at build/SSR time.
+  const [pageUrl, setPageUrl] = useState("");
+  useEffect(() => {
+    // Syncing from the browser's URL, an external system React doesn't
+    // own — the sanctioned case for setState-in-effect, not derived state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPageUrl(window.location.href);
+  }, []);
 
   return (
     <div className="py-[var(--p-space-2)] text-center">
@@ -99,18 +106,8 @@ function SuccessMessage({
         {body || "Your application is in. Here's what to look at next."}
       </p>
 
-      <div className="mt-[var(--p-space-3)] flex flex-col gap-[var(--p-space-1)]">
-        {RESOURCES.map((resource) => (
-          <a
-            key={resource.href}
-            href={resource.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-[var(--p-radius-lg)] border border-(--p-line-strong) px-[var(--p-space-2)] py-[var(--p-space-1)] text-[length:var(--p-text-sm)] font-[var(--p-weight-medium)] text-(--p-ink) transition-colors duration-[var(--p-duration-fast)] ease-(--p-ease) hover:bg-(--p-surface)"
-          >
-            {resource.label} ↗
-          </a>
-        ))}
+      <div className="mt-[var(--p-space-3)]">
+        <ResourceCards resources={RESOURCES} />
       </div>
 
       <p className="mt-[var(--p-space-3)] text-[length:var(--p-text-sm)] text-(--p-muted)">
