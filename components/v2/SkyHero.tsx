@@ -258,7 +258,11 @@ export default function SkyHero() {
 
         <Reveal index={3}>
           <div className="mt-[var(--p-space-4)] flex flex-wrap items-center justify-center gap-[var(--p-space-1)]">
-            <RollButton href="#jams" variant="secondary">
+            <RollButton
+              href="https://share-na2.hsforms.com/1k1a4O5OOQ0-VGlDGQ2cS7g59wvs"
+              external
+              variant="secondary"
+            >
               Join the next design jam
             </RollButton>
             <RollButton href="#apply">Apply to become a partner</RollButton>
