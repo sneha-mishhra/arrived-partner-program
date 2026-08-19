@@ -1,6 +1,5 @@
-// Footer: social links in each platform's real brand color, then the
-// copyright line. A small lift on hover is the only added motion — the
-// color itself is already the personality.
+// Footer: social links, dark by default, each lighting up in that
+// platform's real brand color on hover — then the copyright line.
 
 import { Reveal } from "./motion";
 
@@ -8,73 +7,47 @@ const SOCIALS = [
   {
     name: "Instagram",
     href: "https://www.instagram.com/teamhappily",
+    color: "#E1306C",
     icon: (
-      <svg viewBox="0 0 32 32">
-        <defs>
-          <radialGradient
-            id="ig-grad"
-            cx="30%"
-            cy="107%"
-            r="150%"
-          >
-            <stop offset="0%" stopColor="#fdf497" />
-            <stop offset="5%" stopColor="#fdf497" />
-            <stop offset="45%" stopColor="#fd5949" />
-            <stop offset="60%" stopColor="#d6249f" />
-            <stop offset="90%" stopColor="#285AEB" />
-          </radialGradient>
-        </defs>
-        <rect width="32" height="32" rx="9" fill="url(#ig-grad)" />
-        <rect
-          x="9"
-          y="9"
-          width="14"
-          height="14"
-          rx="4.5"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="1.8"
-        />
-        <circle cx="16" cy="16" r="4" fill="none" stroke="#fff" strokeWidth="1.8" />
-        <circle cx="20.6" cy="11.4" r="1" fill="#fff" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4.2" />
+        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
       </svg>
     ),
   },
   {
     name: "Facebook",
     href: "https://www.facebook.com/teamhappily/",
+    color: "#1877F2",
     icon: (
-      <svg viewBox="0 0 32 32">
-        <rect width="32" height="32" rx="9" fill="#1877F2" />
-        <path
-          d="M20 11.5h-2.2c-.5 0-1 .5-1 1.3v2h3.1l-.4 3h-2.7v7.5h-3.1V17.8h-2v-3h2v-2.4c0-2 1.3-3.9 4-3.9h2.3v2.6z"
-          fill="#fff"
-        />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M15 3h-2a5 5 0 0 0-5 5v3H6v4h2v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1h3z" />
       </svg>
     ),
   },
   {
     name: "YouTube",
     href: "https://www.youtube.com/c/TeamHappily",
+    color: "#FF0000",
     icon: (
-      <svg viewBox="0 0 32 32">
-        <rect width="32" height="32" rx="9" fill="#FF0000" />
-        <path d="M13.5 11.8v8.4l7.5-4.2-7.5-4.2z" fill="#fff" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="2.5" y="6" width="19" height="12" rx="4" />
+        <path d="M10.5 9.5v5l4.5-2.5-4.5-2.5z" fill="currentColor" stroke="none" />
       </svg>
     ),
   },
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/company/happily/",
+    color: "#0A66C2",
     icon: (
-      <svg viewBox="0 0 32 32">
-        <rect width="32" height="32" rx="9" fill="#0A66C2" />
-        <circle cx="10.8" cy="11" r="1.6" fill="#fff" />
-        <rect x="9.4" y="14" width="2.8" height="9" fill="#fff" />
-        <path
-          d="M15 14h2.7v1.3h.04c.38-.7 1.3-1.5 2.7-1.5 2.9 0 3.4 1.9 3.4 4.3V23h-2.8v-4.4c0-1.1 0-2.4-1.5-2.4-1.5 0-1.7 1.1-1.7 2.3V23H15V14z"
-          fill="#fff"
-        />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <line x1="7.5" y1="10.5" x2="7.5" y2="16.5" />
+        <circle cx="7.5" cy="7.2" r="0.2" fill="currentColor" />
+        <path d="M11 16.5v-3.7c0-1.5 1-2.3 2.2-2.3 1.2 0 1.8.8 1.8 2.3v3.7" />
+        <line x1="11" y1="10.5" x2="11" y2="16.5" />
       </svg>
     ),
   },
@@ -93,9 +66,10 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="block size-[36px] overflow-hidden rounded-[var(--p-radius-lg)] transition-transform duration-[var(--p-duration-fast)] ease-(--p-ease) hover:-translate-y-[3px]"
+                style={{ ["--social-color" as string]: social.color }}
+                className="flex size-[38px] items-center justify-center rounded-[var(--p-radius-lg)] bg-(--p-ink) text-(--p-bg) transition-all duration-[var(--p-duration-fast)] ease-(--p-ease) hover:-translate-y-[3px] hover:bg-(--social-color)"
               >
-                {social.icon}
+                <span className="size-[16px]">{social.icon}</span>
               </a>
             ))}
           </div>
