@@ -43,7 +43,12 @@ export default function Jam() {
 
       <Reveal>
         <div className="mt-[var(--p-space-3)] flex justify-center">
-          <RollButton href="#apply">Join the next design jam</RollButton>
+          <RollButton
+            href="https://share-na2.hsforms.com/1k1a4O5OOQ0-VGlDGQ2cS7g59wvs"
+            external
+          >
+            Join the next design jam
+          </RollButton>
         </div>
       </Reveal>
     </Section>

@@ -38,7 +38,7 @@ const ITEMS = [
 ];
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
   const reduced = useReducedMotion();
 
   return (

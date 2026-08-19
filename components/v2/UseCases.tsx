@@ -31,7 +31,7 @@ const CASES = [
 ];
 
 export default function UseCases() {
-  const [open, setOpen] = useState(CASES[0].id);
+  const [open, setOpen] = useState("");
   const reduced = useReducedMotion();
 
   return (

@@ -72,6 +72,7 @@ export function Reveal({
 export function RollButton({
   children,
   href,
+  external = false,
   variant = "primary",
   className = "",
   type,
@@ -79,6 +80,8 @@ export function RollButton({
 }: {
   children: string;
   href?: string;
+  /** Opens href in a new tab, for links off the page (e.g. a hosted form). */
+  external?: boolean;
   variant?: "primary" | "secondary";
   className?: string;
   type?: "button" | "submit";
@@ -114,6 +117,8 @@ export function RollButton({
     return (
       <a
         href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
         className={classes}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
