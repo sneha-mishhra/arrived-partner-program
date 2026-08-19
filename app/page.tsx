@@ -1,29 +1,35 @@
-// PAGE: /partners/designers
-// Matches Figma structure exactly.
-// Each component maps 1:1 to a future Contentful content type.
+// Partner page, built on a custom --p-* CSS token system with Arrived's
+// content: SkyHero, Benefits, UseCases, HowItWorks, Jam, FAQ, Apply, Footer,
+// tied together by a recurring drifting/falling cloud motif.
 
-import Hero from "@/components/Hero";
-import BenefitsGrid from "@/components/BenefitsGrid";
-import ProcessSteps from "@/components/ProcessSteps";
-import DesignJamCard from "@/components/DesignJamCard";
-import FAQ from "@/components/FAQ";
-import ApplyForm from "@/components/ApplyForm";
-import Footer from "@/components/Footer";
+import Apply from "@/components/v2/Apply";
+import Benefits from "@/components/v2/Benefits";
+import FAQ from "@/components/v2/FAQ";
+import Footer from "@/components/v2/Footer";
+import HowItWorks from "@/components/v2/HowItWorks";
+import SkyHero from "@/components/v2/SkyHero";
+import Jam from "@/components/v2/Jam";
+import Nav from "@/components/v2/Nav";
+import UseCases from "@/components/v2/UseCases";
 
-// The apply section reads its form config from the Arrived event, so the page
-// re-fetches every 5 minutes instead of baking the CMS state in at build time.
+// Apply reads the Arrived event's form config, so refresh it on the same
+// cadence as the rest of the page's data.
 export const revalidate = 300;
 
 export default function Page() {
   return (
-    <main className="w-full">
-      <Hero />
-      <BenefitsGrid />
-      <ProcessSteps />
-      <DesignJamCard />
-      <FAQ />
-      <ApplyForm />
+    <div className="p-page relative w-full overflow-x-clip">
+      <Nav />
+      <main>
+        <SkyHero />
+        <Benefits />
+        <UseCases />
+        <HowItWorks />
+        <Jam />
+        <FAQ />
+        <Apply />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }
