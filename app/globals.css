@@ -195,3 +195,255 @@ body {
     @apply font-sans;
   }
 }
+/* ============================================================
+   Partner page design system (prefix: --p-)
+   Every spacing value, color, radius, weight, and duration on
+   the rebuilt partner page references a token below. Nothing in
+   components/v2/ is allowed to invent a raw value.
+   ============================================================ */
+
+:root {
+  /* Neutrals: one ramp, dark to light. */
+  --p-ink: #181818;
+  --p-ink-soft: #2b2b2b;
+  --p-muted: #686868;
+  --p-faint: #a8a8a8;
+  --p-line: #ededed;
+  --p-line-strong: #dbdce0;
+  --p-surface: #f9f9f9;
+  --p-surface-alt: #f6f6f6;
+  --p-bg: #ffffff;
+  /* Translucent surface for sections layered over the sky band. */
+  --p-surface-translucent: color-mix(in srgb, #f9f9f9 78%, transparent);
+
+  /* Accent: Arrived brand purple, used for one thing at a time. */
+  --p-accent: #6d5ae6;
+  --p-accent-soft: #e5deff;
+  --p-accent-ink: #4b3bc4;
+
+  /* Sky, for the hero backdrop. Stops match the reference gradient. */
+  --p-sky-top: #0058c4;
+  --p-sky-mid: #86bdff;
+  --p-sky-low: #cfe4fb;
+
+  /* Chip accents for category marks only, never for surfaces. */
+  --p-chip-violet: #aeabff;
+  --p-chip-green: #a2e198;
+  --p-chip-blue: #c2e1ff;
+  --p-chip-amber: #f4bf4f;
+
+  /* Type scale. Nothing between these steps. */
+  --p-text-xs: 0.75rem;    /* 12 - mono labels */
+  --p-text-sm: 0.875rem;   /* 14 - body, UI */
+  --p-text-base: 1rem;     /* 16 - lead body */
+  --p-text-lg: 1.25rem;    /* 20 - card lead */
+  --p-text-xl: 1.5rem;     /* 24 - card title */
+  --p-text-2xl: 2rem;      /* 32 - sub-section */
+  --p-text-3xl: 2.875rem;  /* 46 - section heading */
+  --p-text-4xl: 3.75rem;   /* 60 - section hero */
+  --p-text-5xl: 4.5rem;    /* 72 - page hero */
+
+  /* Weights: three, no more. */
+  --p-weight-body: 400;
+  --p-weight-medium: 500;
+  --p-weight-strong: 600;
+  --p-weight-bold: 700;
+
+  /* Line heights. */
+  --p-leading-tight: 1.08;
+  --p-leading-snug: 1.3;
+  --p-leading-body: 1.6;
+
+  /* Radii: three values total. Tags are 4, surfaces are 16, controls are
+     pills. Nothing else. */
+  --p-radius-sm: 4px;
+  --p-radius-lg: 16px;
+  --p-radius-pill: 9999px;
+
+  /* Spacing scale, 8px base. */
+  --p-space-1: 0.5rem;
+  --p-space-2: 1rem;
+  --p-space-3: 1.5rem;
+  --p-space-4: 2rem;
+  --p-space-5: 3rem;
+  --p-space-6: 4rem;
+  --p-space-7: 6rem;
+  --p-space-8: 8rem;
+
+  /* Motion: one curve, two durations. */
+  --p-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --p-duration-fast: 160ms;
+  --p-duration-slow: 320ms;
+
+  /* Hover lift, capped. */
+  --p-lift: 3px;
+
+  /* Cloud sizing. Layer widths are authored for desktop and multiplied by
+     this, so small screens get proportionally smaller clouds from one knob. */
+  --p-cloud-scale: 1;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --p-cloud-scale: 0.58;
+  }
+}
+
+@theme inline {
+  --color-p-ink: var(--p-ink);
+  --color-p-ink-soft: var(--p-ink-soft);
+  --color-p-muted: var(--p-muted);
+  --color-p-faint: var(--p-faint);
+  --color-p-line: var(--p-line);
+  --color-p-line-strong: var(--p-line-strong);
+  --color-p-surface: var(--p-surface);
+  --color-p-surface-alt: var(--p-surface-alt);
+  --color-p-surface-translucent: var(--p-surface-translucent);
+  --color-p-bg: var(--p-bg);
+  --color-p-accent: var(--p-accent);
+  --color-p-accent-soft: var(--p-accent-soft);
+  --color-p-accent-ink: var(--p-accent-ink);
+  --font-open-sans: var(--font-open-sans);
+}
+
+/* Shared primitives for the partner page. */
+.p-page {
+  font-family: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  color: var(--p-ink);
+  background: var(--p-bg);
+  font-size: var(--p-text-sm);
+  line-height: var(--p-leading-body);
+}
+
+/* Labels stay in Open Sans. Separation comes from size, weight, and tracking,
+   not from a second typeface. */
+.p-label {
+  font-size: var(--p-text-xs);
+  font-weight: var(--p-weight-strong);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--p-muted);
+}
+
+.p-h2 {
+  font-size: var(--p-text-2xl);
+  font-weight: var(--p-weight-medium);
+  line-height: var(--p-leading-snug);
+  letter-spacing: -0.02em;
+  color: var(--p-ink);
+}
+
+@media (min-width: 768px) {
+  .p-h2 {
+    font-size: var(--p-text-3xl);
+  }
+}
+
+.p-lead {
+  font-size: var(--p-text-base);
+  line-height: var(--p-leading-body);
+  color: var(--p-muted);
+}
+
+/* Cards: one border, one radius, one hover lift. */
+.p-card {
+  border: 1px solid var(--p-line);
+  border-radius: var(--p-radius-lg);
+  background: var(--p-bg);
+  transition:
+    transform var(--p-duration-fast) var(--p-ease),
+    border-color var(--p-duration-fast) var(--p-ease);
+}
+
+.p-card:hover {
+  transform: translateY(calc(-1 * var(--p-lift)));
+  border-color: var(--p-line-strong);
+}
+
+.p-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--p-space-1);
+  border-radius: var(--p-radius-pill);
+  padding: 0.8rem 1.35rem;
+  font-size: var(--p-text-sm);
+  font-weight: var(--p-weight-medium);
+  transition:
+    transform var(--p-duration-fast) var(--p-ease),
+    background-color var(--p-duration-fast) var(--p-ease),
+    border-color var(--p-duration-fast) var(--p-ease);
+}
+
+.p-btn:hover {
+  transform: translateY(calc(-1 * var(--p-lift)));
+}
+
+.p-btn-primary {
+  background: var(--p-ink);
+  color: var(--p-bg);
+}
+
+.p-btn-primary:hover {
+  background: var(--p-ink-soft);
+}
+
+.p-btn-secondary {
+  background: var(--p-bg);
+  color: var(--p-ink);
+  border: 1px solid var(--p-line-strong);
+}
+
+.p-btn-secondary:hover {
+  background: var(--p-surface);
+}
+
+/* Hero backdrop: faint grid, no glow. */
+.p-grid-bg {
+  background-image:
+    linear-gradient(to right, var(--p-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--p-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-card,
+  .p-btn {
+    transition: none;
+  }
+
+  .p-card:hover,
+  .p-btn:hover {
+    transform: none;
+  }
+}
+
+/* Cloud motion for the sky hero.
+   The old drift ran 8% over 78-128s, which is about a pixel every two seconds:
+   technically moving, visually static. This travels further, bobs vertically,
+   and runs fast enough to read as weather. Durations still differ per layer so
+   the bank never moves as a sheet. */
+@keyframes p-cloud-float {
+  0% {
+    transform: translate3d(-9%, 0, 0);
+  }
+  50% {
+    transform: translate3d(9%, -26px, 0);
+  }
+  100% {
+    transform: translate3d(-9%, 0, 0);
+  }
+}
+
+.p-cloud-float {
+  animation: p-cloud-float var(--p-cloud-duration, 22s) ease-in-out infinite;
+  animation-delay: var(--p-cloud-delay, 0s);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-cloud-float {
+    animation: none;
+  }
+}

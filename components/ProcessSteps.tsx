@@ -17,7 +17,7 @@ const STEPS = [
   {
     number: 3,
     title: "Complete your modules & request Pro",
-    body: "Work through the training modules at your own pace. Once done, email sneha@teamhappily.com to unlock Pro access.",
+    body: "Work through the training modules at your own pace. Once done, email partners@teamhappily.com to unlock Pro access.",
   },
   {
     number: 4,

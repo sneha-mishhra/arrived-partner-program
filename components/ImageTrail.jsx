@@ -157,6 +157,9 @@ const variantMap = {
   1: ImageTrailVariant1
 };
 
+/**
+ * @param {{ items?: string[], variant?: number }} props
+ */
 export default function ImageTrail({ items = [], variant = 1 }) {
   const containerRef = useRef(null);
 

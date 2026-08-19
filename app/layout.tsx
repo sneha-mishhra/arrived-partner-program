@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Open_Sans } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+// Open Sans is the only face on the partner page. Labels and numerals are
+// separated by weight, size, and tracking rather than by a second family.
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
 });
 
@@ -15,7 +22,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${openSans.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col bg-white text-brand-navy">
         {children}
       </body>
