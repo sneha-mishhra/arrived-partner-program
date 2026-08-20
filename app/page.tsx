@@ -2,6 +2,7 @@
 // content: SkyHero, Benefits, UseCases, HowItWorks, Jam, FAQ, Apply, Footer,
 // tied together by a recurring drifting/falling cloud motif.
 
+import AboutArrived from "@/components/v2/AboutArrived";
 import Apply from "@/components/v2/Apply";
 import Benefits from "@/components/v2/Benefits";
 import FAQ from "@/components/v2/FAQ";
@@ -22,6 +23,7 @@ export default function Page() {
       <Nav />
       <main>
         <SkyHero />
+        <AboutArrived />
         <Benefits />
         <UseCases />
         <HowItWorks />
