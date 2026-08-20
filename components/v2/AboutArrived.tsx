@@ -36,9 +36,9 @@ export default function AboutArrived() {
             <p className="p-lead">
               Arrived is built by Happily, a worldwide network of
               award-winning event specialists across 150+ different roles.
-              Other platforms drop hosts into an empty room. We stand by to
-              make sure they shine, and that&apos;s what you&apos;ll be
-              designing inside.
+              The platform gives hosts the design they deserve, handling
+              everything end to end, from their event site to check-in on
+              the day. That&apos;s the experience you&apos;ll be designing.
             </p>
           </Reveal>
 
