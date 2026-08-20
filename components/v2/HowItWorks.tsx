@@ -9,42 +9,50 @@ import type { ReactNode } from "react";
 import Section from "./Section";
 import { Reveal } from "./motion";
 
+const linkClass =
+  "underline decoration-(--p-line-strong) underline-offset-2 hover:text-(--p-ink)";
+
 const STEPS: { step: string; title: string; body: ReactNode }[] = [
   {
     step: "step 1",
     title: "Register",
-    body: "Create your Arrived account. Takes under a minute.",
+    body: "Fill out the application below to get started.",
   },
   {
     step: "step 2",
-    title: "Learn about Arrived",
-    body: "Go through everything linked in your confirmation email once you register.",
-  },
-  {
-    step: "step 3",
-    title: "Request Pro",
+    title: "Build your sample pages",
     body: (
       <>
-        Email us at{" "}
+        Build 3 sample pages using{" "}
         <a
-          href="mailto:designpartners@teamhappily.com"
-          className="underline decoration-(--p-line-strong) underline-offset-2 hover:text-(--p-ink)"
+          href="https://teamhappily.com/arrived?utm_source=partner-page&utm_medium=web&utm_campaign=partner-page"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
         >
-          designpartners@teamhappily.com
-        </a>{" "}
-        to get access to Pro.
+          our Arrived page
+        </a>
+        , so we can see what you can do.
       </>
     ),
   },
   {
-    step: "step 4",
-    title: "Build sample pages",
-    body: "Build 3 different types of sample pages so we can see the events you can handle and your aesthetic.",
-  },
-  {
-    step: "step 5",
-    title: "Get reviewed, get matched",
-    body: "We review the work and add you to the designer database. Clients get matched to you by style and strengths.",
+    step: "step 3",
+    title: "Submit your pages",
+    body: (
+      <>
+        Whenever you feel good about your 3 pages,{" "}
+        <a
+          href="https://59wvs.share-na2.hsforms.com/2I-pIvmj2Sd-1We0551sv8g"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
+          submit them
+        </a>{" "}
+        for review.
+      </>
+    ),
   },
 ];
 
@@ -60,7 +68,7 @@ export default function HowItWorks() {
       tone="transparent"
       padBottom="sm"
     >
-      <ol className="relative grid gap-0 md:grid-cols-5 md:gap-[var(--p-space-2)]">
+      <ol className="relative grid gap-0 md:grid-cols-3 md:gap-[var(--p-space-2)]">
         {/* Connecting rule, desktop only. */}
         <span
           aria-hidden="true"
