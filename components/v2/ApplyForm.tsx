@@ -149,6 +149,36 @@ function SuccessMessage({
         {body || "Your application is in. Here's what to look at next."}
       </p>
 
+      <div className="p-card mt-[var(--p-space-3)] flex flex-col items-center gap-[var(--p-space-2)] p-[var(--p-space-3)] text-left sm:flex-row sm:text-left">
+        <span
+          aria-hidden="true"
+          className="flex size-[44px] shrink-0 items-center justify-center rounded-[var(--p-radius-sm)]"
+          style={{ background: "color-mix(in srgb, var(--p-chip-green) 30%, transparent)", color: "var(--p-chip-green)" }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-[22px]">
+            <circle cx="12" cy="12" r="9" />
+            <path d="m15 9-2 5-5 2 2-5 5-2Z" />
+          </svg>
+        </span>
+
+        <div className="flex-1">
+          <h4 className="text-[length:var(--p-text-base)] font-[var(--p-weight-medium)] text-(--p-ink)">
+            Explore Arrived
+          </h4>
+          <p className="mt-[2px] text-[length:var(--p-text-sm)] text-(--p-muted)">
+            Create a free account and get familiar with the platform.
+          </p>
+        </div>
+
+        <RollButton
+          href="https://teamhappily.com/arrived?utm_source=partner-page&utm_medium=web&utm_campaign=partner-page"
+          external
+          variant="secondary"
+        >
+          Explore Arrived
+        </RollButton>
+      </div>
+
       <div className="mt-[var(--p-space-3)]">
         <ResourceCards resources={RESOURCES} />
       </div>
