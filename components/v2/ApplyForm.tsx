@@ -239,6 +239,46 @@ function Field({ field }: { field: PublicFormField }) {
     );
   }
 
+  if (field.inputType === "dropdown") {
+    const options = field.items?.enum ?? [];
+
+    return (
+      <div className={HALF_WIDTH.has(field.id) ? "" : "sm:col-span-2"}>
+        <label htmlFor={field.id} className="p-label">
+          {label}
+        </label>
+        <div className="relative mt-[var(--p-space-1)]">
+          <select
+            id={field.id}
+            name={field.id}
+            required={field.required}
+            defaultValue=""
+            className={`${fieldClass} appearance-none pr-[var(--p-space-4)]`}
+          >
+            <option value="" disabled>
+              Select {field.title.toLowerCase()}
+            </option>
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            className="pointer-events-none absolute right-[var(--p-space-2)] top-1/2 size-[12px] -translate-y-1/2 text-(--p-muted)"
+          >
+            <path d="m4 6 4 4 4-4" />
+          </svg>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={HALF_WIDTH.has(field.id) ? "" : "sm:col-span-2"}>
       <label htmlFor={field.id} className="p-label">
