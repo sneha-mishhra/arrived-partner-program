@@ -22,7 +22,7 @@ import ResourceCards, { type Resource } from "./ResourceCards";
 
 const initialState: RegistrationState = { ok: false };
 
-const HALF_WIDTH = new Set(["firstName", "lastName", "title", "phoneNumber"]);
+const HALF_WIDTH = new Set(["firstName", "lastName"]);
 
 const fieldClass =
   "w-full rounded-[var(--p-radius-pill)] border border-(--p-line-strong) bg-(--p-bg) px-[var(--p-space-2)] py-[0.7rem] text-[length:var(--p-text-sm)] text-(--p-ink) outline-none transition-colors duration-[var(--p-duration-fast)] ease-(--p-ease) focus:border-(--p-accent)";

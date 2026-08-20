@@ -34,5 +34,5 @@ export const AUTOCOMPLETE: Record<string, string> = {
   emailAddress: "email",
   company: "organization",
   phoneNumber: "tel",
-  title: "organization-title",
+  title: "url",
 };
