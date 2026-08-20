@@ -46,46 +46,37 @@ const RESOURCES: Resource[] = [
   },
 ];
 
-const SHARE_TEXT = "Arrived is looking for design partners — worth a look.";
+const SHARE_TEXT = "Arrived is looking for design partners, worth a look.";
 
 function shareLinks(url: string) {
   return [
     {
-      name: "X",
-      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(url)}`,
+      name: "Instagram",
+      // Instagram has no web share-intent URL, so this opens Instagram
+      // itself; the link is copied to the clipboard first (see the click
+      // handler below) so it's ready to paste into a bio, story, or DM.
+      href: "https://www.instagram.com/",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4.2" />
+          <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+        </svg>
+      ),
+    },
+    {
+      name: "WhatsApp",
+      href: `https://wa.me/?text=${encodeURIComponent(`${SHARE_TEXT} ${url}`)}`,
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.5 22H1.4l8.1-9.3L1 2h7l4.9 6z" />
-        </svg>
-      ),
-    },
-    {
-      name: "LinkedIn",
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <rect x="3" y="3" width="18" height="18" rx="3" />
-          <line x1="7.5" y1="10.5" x2="7.5" y2="16.5" />
-          <circle cx="7.5" cy="7.2" r="0.2" fill="currentColor" />
-          <path d="M11 16.5v-3.7c0-1.5 1-2.3 2.2-2.3 1.2 0 1.8.8 1.8 2.3v3.7" />
-          <line x1="11" y1="10.5" x2="11" y2="16.5" />
-        </svg>
-      ),
-    },
-    {
-      name: "Email",
-      href: `mailto:?subject=${encodeURIComponent("Arrived design partner program")}&body=${encodeURIComponent(`${SHARE_TEXT} ${url}`)}`,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <rect x="3" y="5" width="18" height="14" rx="2" />
-          <path d="m4 7 8 6 8-6" />
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.4-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.19 8.19 0 0 1-1.26-4.38c.01-4.54 3.7-8.23 8.25-8.23M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.12-.24-.01-.39.11-.5.11-.11.27-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01" />
         </svg>
       ),
     },
   ];
 }
 
-function SuccessMessage({
+export function SuccessMessage({
   title,
   body,
 }: {
@@ -102,6 +93,26 @@ function SuccessMessage({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPageUrl(window.location.href);
   }, []);
+
+  const [copied, setCopied] = useState(false);
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+    } catch {
+      // Clipboard API can be denied (older Safari, an unfocused tab); a
+      // hidden textarea + execCommand is the long-standing fallback.
+      const el = document.createElement("textarea");
+      el.value = pageUrl;
+      el.style.position = "fixed";
+      el.style.opacity = "0";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+  };
 
   return (
     <div className="py-[var(--p-space-2)] text-center">
@@ -124,8 +135,8 @@ function SuccessMessage({
         >
           designpartners@teamhappily.com
         </a>{" "}
-        for Pro access — custom event builds can only be done using our Pro
-        feature.
+        for Pro access, since custom event builds can only be done using our
+        Pro feature.
       </p>
 
       <p className="mt-[var(--p-space-2)] text-[length:var(--p-text-sm)] text-(--p-muted)">
@@ -142,12 +153,37 @@ function SuccessMessage({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Share on ${share.name}`}
+              onClick={share.name === "Instagram" ? copyLink : undefined}
               className="flex size-[38px] items-center justify-center rounded-full border border-(--p-line-strong) text-(--p-muted) transition-all duration-[var(--p-duration-fast)] ease-(--p-ease) hover:-translate-y-[3px] hover:border-(--p-accent) hover:text-(--p-accent)"
             >
               <span className="size-[16px]">{share.icon}</span>
             </a>
           ))}
+
+          <button
+            type="button"
+            onClick={copyLink}
+            aria-label="Copy link"
+            className="flex size-[38px] items-center justify-center rounded-full border border-(--p-line-strong) text-(--p-muted) transition-all duration-[var(--p-duration-fast)] ease-(--p-ease) hover:-translate-y-[3px] hover:border-(--p-accent) hover:text-(--p-accent)"
+          >
+            {copied ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-[16px]">
+                <path d="m4 12 5 5 11-11" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-[16px]">
+                <rect x="8" y="8" width="12" height="12" rx="2.5" />
+                <path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4H6.5A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" />
+              </svg>
+            )}
+          </button>
         </div>
+
+        {copied ? (
+          <p className="mt-[var(--p-space-1)] text-[length:var(--p-text-xs)] text-(--p-faint)">
+            Link copied
+          </p>
+        ) : null}
       </div>
     </div>
   );

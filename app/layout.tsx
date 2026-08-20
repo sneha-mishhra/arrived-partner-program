@@ -14,10 +14,28 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
+const title = "Design Event Websites & Brand Kits | Arrived Designer Partners";
+const description =
+  "Join Arrived's designer network. Get matched to event hosts who need brand kits, invites, signage, and custom design work, with real budgets and clear scope.";
+
 export const metadata: Metadata = {
-  title: "Design Event Websites & Brand Kits | Arrived Designer Partners",
-  description:
-    "Join Arrived's designer network. Get matched to event hosts who need brand kits, invites, signage, and custom design work, with real budgets and clear scope.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
+  ),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    images: [{ url: "/arrived-hero.png", width: 1969, height: 1118 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/arrived-hero.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
