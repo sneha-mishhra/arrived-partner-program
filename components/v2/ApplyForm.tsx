@@ -30,13 +30,19 @@ const fieldClass =
 const RESOURCES: Resource[] = [
   {
     label: "About the Arrived platform",
+    tag: "GUIDE",
+    body: "How the builder works, end to end, before you touch a brief.",
     href: "https://docs.google.com/document/d/1baqWyG_txn1vbBS8xuTxg90xu-OxULNDEeeaJg13DBY/edit?usp=sharing",
-    image: "/platform-module.png",
+    mark: "doc",
+    color: "var(--p-chip-violet)",
   },
   {
     label: "Assignment brief",
+    tag: "PDF",
+    body: "The task you'll be evaluated on for your first design jam.",
     href: "https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Partner%20Assignment.pdf",
-    image: "/partner-assignment.png",
+    mark: "brief",
+    color: "var(--p-chip-amber)",
   },
 ];
 

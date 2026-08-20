@@ -1,16 +1,40 @@
-// Floating document panel over a contained cloud band, styled after the
-// "how it works" floating card on verseo.framer.website: stacked cards with
-// small caption chips over a cloudy blue backdrop, instead of a bare list
-// of links.
+// Resource links, styled with the same pixel-mark language as the benefit
+// cards (see Benefits.tsx) instead of stock document photography — keeps the
+// success screen on the same design system rather than reaching for generic
+// browser-window mockups.
 
-import Image from "next/image";
+const MARKS: Record<string, string[]> = {
+  doc: ["11110", "10001", "10111", "10001", "11111"],
+  brief: ["11111", "10000", "11110", "10000", "10000"],
+};
 
-import Sky, { DARK_BAND } from "./Sky";
+function PixelMark({ mark, color }: { mark: keyof typeof MARKS; color: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="grid gap-[3px]"
+      style={{ gridTemplateColumns: "repeat(5, 6px)" }}
+    >
+      {MARKS[mark].flatMap((row, y) =>
+        row.split("").map((cell, x) => (
+          <span
+            key={`${x}-${y}`}
+            className="block size-[6px]"
+            style={{ background: cell === "1" ? color : "transparent" }}
+          />
+        )),
+      )}
+    </span>
+  );
+}
 
 export type Resource = {
   label: string;
+  tag: string;
+  body: string;
   href: string;
-  image: string;
+  mark: keyof typeof MARKS;
+  color: string;
 };
 
 export default function ResourceCards({
@@ -19,39 +43,48 @@ export default function ResourceCards({
   resources: Resource[];
 }) {
   return (
-    <div className="relative isolate overflow-hidden rounded-[var(--p-radius-lg)] border border-(--p-line) px-[var(--p-space-3)] py-[var(--p-space-5)]">
-      <Sky wash band={DARK_BAND} insetTop={20} insetBottom={20} />
-
-      <div className="relative z-10 mx-auto flex max-w-[280px] flex-col gap-[var(--p-space-4)]">
-        {resources.map((resource, i) => (
-          <a
-            key={resource.href}
-            href={resource.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`group relative block transition-transform duration-[var(--p-duration-slow)] ease-(--p-ease) hover:-translate-y-[4px] ${
-              i % 2 === 0 ? "-rotate-2 self-start" : "rotate-2 self-end"
-            }`}
-          >
-            <div className="relative aspect-[10/6.5] w-[240px] overflow-hidden rounded-[var(--p-radius-sm)] border border-(--p-line-strong) bg-(--p-bg) shadow-[0_20px_40px_-16px_rgba(0,0,0,0.4)]">
-              <Image
-                src={resource.image}
-                alt={resource.label}
-                fill
-                sizes="240px"
-                className="object-cover object-top"
-              />
-            </div>
+    <div className="grid gap-[var(--p-space-2)] text-left sm:grid-cols-2">
+      {resources.map((resource) => (
+        <a
+          key={resource.href}
+          href={resource.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-card group flex flex-col gap-[var(--p-space-2)] p-[var(--p-space-3)]"
+        >
+          <div className="flex items-center justify-between">
             <span
-              className={`absolute -bottom-[10px] rounded-[var(--p-radius-pill)] border border-(--p-line-strong) bg-(--p-bg) px-[var(--p-space-2)] py-[4px] text-[length:var(--p-text-xs)] font-[var(--p-weight-medium)] text-(--p-ink) shadow-[0_6px_16px_-6px_rgba(0,0,0,0.3)] group-hover:underline ${
-                i % 2 === 0 ? "-right-[10px]" : "-left-[10px]"
-              }`}
+              className="flex size-[36px] items-center justify-center rounded-[var(--p-radius-sm)]"
+              style={{ background: `color-mix(in srgb, ${resource.color} 22%, transparent)` }}
             >
-              {resource.label} ↗
+              <PixelMark mark={resource.mark} color={resource.color} />
             </span>
-          </a>
-        ))}
-      </div>
+            <span className="p-label text-(--p-faint)">{resource.tag}</span>
+          </div>
+
+          <div>
+            <h4 className="text-[length:var(--p-text-base)] font-[var(--p-weight-medium)] text-(--p-ink)">
+              {resource.label}
+            </h4>
+            <p className="mt-[2px] text-[length:var(--p-text-sm)] text-(--p-muted)">
+              {resource.body}
+            </p>
+          </div>
+
+          <span className="mt-auto inline-flex items-center gap-[6px] text-[length:var(--p-text-sm)] font-[var(--p-weight-medium)] text-(--p-ink)">
+            View
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              className="size-[13px] transition-transform duration-[var(--p-duration-fast)] ease-(--p-ease) group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
+            >
+              <path d="M4 12 12 4M6 4h6v6" />
+            </svg>
+          </span>
+        </a>
+      ))}
     </div>
   );
 }
