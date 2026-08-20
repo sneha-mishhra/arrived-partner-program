@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Open_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+const UMAMI_WEBSITE_ID = "b6539573-7b07-408c-9633-525ae3a21b6d";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +49,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-white text-brand-navy">
         {children}
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id={UMAMI_WEBSITE_ID}
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://cloud.umami.is/recorder.js"
+          data-website-id={UMAMI_WEBSITE_ID}
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
