@@ -18,6 +18,7 @@ import type {
   PublicFormField,
 } from "@/lib/happily/types";
 
+import { RollButton } from "./motion";
 import ResourceCards, { type Resource } from "./ResourceCards";
 
 const initialState: RegistrationState = { ok: false };
@@ -33,16 +34,28 @@ const RESOURCES: Resource[] = [
     tag: "GUIDE",
     body: "How the builder works, end to end, before you touch a brief.",
     href: "https://docs.google.com/document/d/1baqWyG_txn1vbBS8xuTxg90xu-OxULNDEeeaJg13DBY/edit?usp=sharing",
-    mark: "doc",
     color: "var(--p-chip-violet)",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M7 3h7l4 4v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
+        <path d="M14 3v4h4" />
+        <path d="M8.5 12.5h7M8.5 15.5h7M8.5 9.5h3" />
+      </svg>
+    ),
   },
   {
     label: "Assignment brief",
     tag: "PDF",
     body: "The task you'll be evaluated on for your first design jam.",
     href: "https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Partner%20Assignment.pdf",
-    mark: "brief",
     color: "var(--p-chip-amber)",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M8 4h6l4 4v11a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" />
+        <path d="M14 4v4h4" />
+        <path d="m9.5 13 1.6 1.6L15 11" />
+      </svg>
+    ),
   },
 ];
 
@@ -73,10 +86,23 @@ function shareLinks(url: string) {
         </svg>
       ),
     },
+    {
+      name: "LinkedIn",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <rect x="3" y="3" width="18" height="18" rx="3" />
+          <line x1="7.5" y1="10.5" x2="7.5" y2="16.5" />
+          <circle cx="7.5" cy="7.2" r="0.2" fill="currentColor" />
+          <path d="M11 16.5v-3.7c0-1.5 1-2.3 2.2-2.3 1.2 0 1.8.8 1.8 2.3v3.7" />
+          <line x1="11" y1="10.5" x2="11" y2="16.5" />
+        </svg>
+      ),
+    },
   ];
 }
 
-export function SuccessMessage({
+function SuccessMessage({
   title,
   body,
 }: {
@@ -125,6 +151,32 @@ export function SuccessMessage({
 
       <div className="mt-[var(--p-space-3)]">
         <ResourceCards resources={RESOURCES} />
+      </div>
+
+      <div className="p-card mt-[var(--p-space-3)] flex flex-col items-center gap-[var(--p-space-2)] p-[var(--p-space-3)] text-left sm:flex-row sm:text-left">
+        <span
+          aria-hidden="true"
+          className="flex size-[44px] shrink-0 items-center justify-center rounded-[var(--p-radius-sm)]"
+          style={{ background: "color-mix(in srgb, #5865f2 16%, transparent)" }}
+        >
+          <svg viewBox="0 0 24 24" fill="#5865f2" className="size-[22px]">
+            <path d="M20.3 5.4A17.6 17.6 0 0 0 15.9 4c-.2.4-.5.9-.6 1.3a16.3 16.3 0 0 0-4.6 0A9 9 0 0 0 10 4a17.6 17.6 0 0 0-4.4 1.4C3 9.4 2.3 13.3 2.6 17.1a17.7 17.7 0 0 0 5.4 2.7c.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.8-.9l.4-.3c3.4 1.6 7.1 1.6 10.5 0l.4.3c-.6.4-1.2.7-1.8.9.3.7.7 1.3 1.1 1.9a17.6 17.6 0 0 0 5.4-2.7c.4-4.4-.7-8.3-3.4-11.7ZM9.7 14.7c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Zm6.6 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z" />
+          </svg>
+        </span>
+
+        <div className="flex-1">
+          <h4 className="text-[length:var(--p-text-base)] font-[var(--p-weight-medium)] text-(--p-ink)">
+            Join the partner Discord
+          </h4>
+          <p className="mt-[2px] text-[length:var(--p-text-sm)] text-(--p-muted)">
+            Ask questions, browse inspiration sites other partners have
+            posted, and get updates on the design program and design jams.
+          </p>
+        </div>
+
+        <RollButton href="https://discord.gg/Scu9yFyD7" external variant="secondary">
+          Join Discord
+        </RollButton>
       </div>
 
       <p className="mt-[var(--p-space-3)] text-[length:var(--p-text-sm)] text-(--p-muted)">

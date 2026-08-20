@@ -1,39 +1,15 @@
-// Resource links, styled with the same pixel-mark language as the benefit
-// cards (see Benefits.tsx) instead of stock document photography — keeps the
-// success screen on the same design system rather than reaching for generic
-// browser-window mockups.
+// Resource links, styled as simple icon cards rather than stock document
+// photography — keeps the success screen on the same design system as the
+// rest of the page instead of reaching for browser-window mockups.
 
-const MARKS: Record<string, string[]> = {
-  doc: ["11110", "10001", "10111", "10001", "11111"],
-  brief: ["11111", "10000", "11110", "10000", "10000"],
-};
-
-function PixelMark({ mark, color }: { mark: keyof typeof MARKS; color: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="grid gap-[3px]"
-      style={{ gridTemplateColumns: "repeat(5, 6px)" }}
-    >
-      {MARKS[mark].flatMap((row, y) =>
-        row.split("").map((cell, x) => (
-          <span
-            key={`${x}-${y}`}
-            className="block size-[6px]"
-            style={{ background: cell === "1" ? color : "transparent" }}
-          />
-        )),
-      )}
-    </span>
-  );
-}
+import type { ReactNode } from "react";
 
 export type Resource = {
   label: string;
   tag: string;
   body: string;
   href: string;
-  mark: keyof typeof MARKS;
+  icon: ReactNode;
   color: string;
 };
 
@@ -55,9 +31,9 @@ export default function ResourceCards({
           <div className="flex items-center justify-between">
             <span
               className="flex size-[36px] items-center justify-center rounded-[var(--p-radius-sm)]"
-              style={{ background: `color-mix(in srgb, ${resource.color} 22%, transparent)` }}
+              style={{ background: `color-mix(in srgb, ${resource.color} 18%, transparent)`, color: resource.color }}
             >
-              <PixelMark mark={resource.mark} color={resource.color} />
+              <span className="size-[18px]">{resource.icon}</span>
             </span>
             <span className="p-label text-(--p-faint)">{resource.tag}</span>
           </div>
