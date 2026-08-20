@@ -5,7 +5,7 @@
 // go to the same server action and land in the event's attendee list.
 // Pending state: button disables, label swaps, spinner shows, aria-busy set.
 
-import { useActionState, useEffect, useState } from "react";
+import { type ReactNode, useActionState, useEffect, useState } from "react";
 
 import {
   type RegistrationState,
@@ -18,9 +18,6 @@ import type {
   PublicFormField,
 } from "@/lib/happily/types";
 
-import { RollButton } from "./motion";
-import ResourceCards, { type Resource } from "./ResourceCards";
-
 const initialState: RegistrationState = { ok: false };
 
 const HALF_WIDTH = new Set(["firstName", "lastName"]);
@@ -28,33 +25,77 @@ const HALF_WIDTH = new Set(["firstName", "lastName"]);
 const fieldClass =
   "w-full rounded-[var(--p-radius-pill)] border border-(--p-line-strong) bg-(--p-bg) px-[var(--p-space-2)] py-[0.7rem] text-[length:var(--p-text-sm)] text-(--p-ink) outline-none transition-colors duration-[var(--p-duration-fast)] ease-(--p-ease) focus:border-(--p-accent)";
 
-const RESOURCES: Resource[] = [
+const successLinkClass =
+  "text-(--p-ink) underline decoration-(--p-line-strong) underline-offset-2";
+
+const NEXT_STEPS: { title: string; body: ReactNode }[] = [
   {
-    label: "About the Arrived platform",
-    tag: "GUIDE",
-    body: "How the builder works, end to end, before you touch a brief.",
-    href: "https://docs.google.com/document/d/1baqWyG_txn1vbBS8xuTxg90xu-OxULNDEeeaJg13DBY/edit?usp=sharing",
-    color: "var(--p-chip-violet)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M7 3h7l4 4v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
-        <path d="M14 3v4h4" />
-        <path d="M8.5 12.5h7M8.5 15.5h7M8.5 9.5h3" />
-      </svg>
+    title: "Create your Arrived account",
+    body: (
+      <>
+        Head to{" "}
+        <a
+          href="https://teamhappily.com/arrived?utm_source=partner-page&utm_medium=web&utm_campaign=partner-page"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={successLinkClass}
+        >
+          Arrived
+        </a>{" "}
+        and set up your free account.
+      </>
     ),
   },
   {
-    label: "Assignment brief",
-    tag: "PDF",
-    body: "The task you'll be evaluated on for your first design jam.",
-    href: "https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Partner%20Assignment.pdf",
-    color: "var(--p-chip-amber)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M8 4h6l4 4v11a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" />
-        <path d="M14 4v4h4" />
-        <path d="m9.5 13 1.6 1.6L15 11" />
-      </svg>
+    title: "Learn the platform",
+    body: (
+      <>
+        Go through the platform. Refer to the{" "}
+        <a
+          href="https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Platform%20Guide.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={successLinkClass}
+        >
+          platform guide
+        </a>{" "}
+        if you need help.
+      </>
+    ),
+  },
+  {
+    title: "Build your sample pages",
+    body: (
+      <>
+        Once you feel familiar, create 3 sample pages. Refer to the{" "}
+        <a
+          href="https://8860600.fs1.hubspotusercontent-na2.net/hubfs/8860600/Arrived%20Partner%20Assignment-1.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={successLinkClass}
+        >
+          assignment brief
+        </a>{" "}
+        to understand what we&apos;re looking for and why.
+      </>
+    ),
+  },
+  {
+    title: "Join the community",
+    body: (
+      <>
+        Join our{" "}
+        <a
+          href="https://discord.gg/Scu9yFyD7"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={successLinkClass}
+        >
+          partner Discord
+        </a>{" "}
+        to ask questions, browse inspiration sites other partners have
+        posted, and get updates on the design program and design jams.
+      </>
     ),
   },
 ];
@@ -149,76 +190,48 @@ function SuccessMessage({
         {body || "Your application is in. Here's what to look at next."}
       </p>
 
-      <div className="p-card mt-[var(--p-space-3)] flex flex-col items-center gap-[var(--p-space-2)] p-[var(--p-space-3)] text-left sm:flex-row sm:text-left">
-        <span
-          aria-hidden="true"
-          className="flex size-[44px] shrink-0 items-center justify-center rounded-[var(--p-radius-sm)]"
-          style={{ background: "color-mix(in srgb, var(--p-chip-green) 30%, transparent)", color: "var(--p-chip-green)" }}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="size-[22px]">
-            <circle cx="12" cy="12" r="9" />
-            <path d="m15 9-2 5-5 2 2-5 5-2Z" />
-          </svg>
-        </span>
+      <div className="p-card mt-[var(--p-space-3)] p-[var(--p-space-3)] text-left">
+        <p className="p-label text-center">Next steps</p>
+        <ol className="mt-[var(--p-space-3)]">
+          {NEXT_STEPS.map((step, i) => (
+            <li key={step.title} className="flex gap-[var(--p-space-2)]">
+              <div className="flex shrink-0 flex-col items-center">
+                <span
+                  aria-hidden="true"
+                  className="flex size-[26px] shrink-0 items-center justify-center rounded-full border border-(--p-line-strong) bg-(--p-bg) text-[length:var(--p-text-xs)] font-[var(--p-weight-strong)] tabular-nums text-(--p-ink)"
+                >
+                  {i + 1}
+                </span>
+                {i < NEXT_STEPS.length - 1 ? (
+                  <span
+                    aria-hidden="true"
+                    className="mt-[var(--p-space-1)] w-px flex-1 bg-(--p-line)"
+                  />
+                ) : null}
+              </div>
 
-        <div className="flex-1">
-          <h4 className="text-[length:var(--p-text-base)] font-[var(--p-weight-medium)] text-(--p-ink)">
-            Explore Arrived
-          </h4>
-          <p className="mt-[2px] text-[length:var(--p-text-sm)] text-(--p-muted)">
-            Create a free account and get familiar with the platform.
-          </p>
-        </div>
-
-        <RollButton
-          href="https://teamhappily.com/arrived?utm_source=partner-page&utm_medium=web&utm_campaign=partner-page"
-          external
-          variant="secondary"
-        >
-          Explore Arrived
-        </RollButton>
-      </div>
-
-      <div className="mt-[var(--p-space-3)]">
-        <ResourceCards resources={RESOURCES} />
-      </div>
-
-      <div className="p-card mt-[var(--p-space-3)] flex flex-col items-center gap-[var(--p-space-2)] p-[var(--p-space-3)] text-left sm:flex-row sm:text-left">
-        <span
-          aria-hidden="true"
-          className="flex size-[44px] shrink-0 items-center justify-center rounded-[var(--p-radius-sm)]"
-          style={{ background: "color-mix(in srgb, #5865f2 16%, transparent)" }}
-        >
-          <svg viewBox="0 0 24 24" fill="#5865f2" className="size-[22px]">
-            <path d="M20.3 5.4A17.6 17.6 0 0 0 15.9 4c-.2.4-.5.9-.6 1.3a16.3 16.3 0 0 0-4.6 0A9 9 0 0 0 10 4a17.6 17.6 0 0 0-4.4 1.4C3 9.4 2.3 13.3 2.6 17.1a17.7 17.7 0 0 0 5.4 2.7c.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.8-.9l.4-.3c3.4 1.6 7.1 1.6 10.5 0l.4.3c-.6.4-1.2.7-1.8.9.3.7.7 1.3 1.1 1.9a17.6 17.6 0 0 0 5.4-2.7c.4-4.4-.7-8.3-3.4-11.7ZM9.7 14.7c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.9 2.1-1.9 2.1Zm6.6 0c-1 0-1.9-1-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z" />
-          </svg>
-        </span>
-
-        <div className="flex-1">
-          <h4 className="text-[length:var(--p-text-base)] font-[var(--p-weight-medium)] text-(--p-ink)">
-            Join the partner Discord
-          </h4>
-          <p className="mt-[2px] text-[length:var(--p-text-sm)] text-(--p-muted)">
-            Ask questions, browse inspiration sites other partners have
-            posted, and get updates on the design program and design jams.
-          </p>
-        </div>
-
-        <RollButton href="https://discord.gg/Scu9yFyD7" external variant="secondary">
-          Join Discord
-        </RollButton>
+              <div className={i < NEXT_STEPS.length - 1 ? "pb-[var(--p-space-3)]" : ""}>
+                <h4 className="text-[length:var(--p-text-sm)] font-[var(--p-weight-medium)] leading-[var(--p-leading-snug)] text-(--p-ink)">
+                  {step.title}
+                </h4>
+                <p className="mt-[2px] text-[length:var(--p-text-sm)] text-(--p-muted)">
+                  {step.body}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
 
       <p className="mt-[var(--p-space-3)] text-[length:var(--p-text-sm)] text-(--p-muted)">
-        Once you have gone through those, email us at{" "}
+        If you have any questions or doubts along the way, email us at{" "}
         <a
           href="mailto:designpartners@teamhappily.com"
           className="text-(--p-ink) underline decoration-(--p-line-strong) underline-offset-2"
         >
           designpartners@teamhappily.com
-        </a>{" "}
-        for Pro access, since custom event builds can only be done using our
-        Pro feature.
+        </a>
+        .
       </p>
 
       <p className="mt-[var(--p-space-2)] text-[length:var(--p-text-sm)] text-(--p-muted)">
