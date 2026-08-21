@@ -21,11 +21,11 @@ const ITEMS = [
   },
   {
     q: "How long is the onboarding process?",
-    a: "Usually about a week. You register, work through the modules, and apply for Pro access. Most partners are live and taking briefs within seven days.",
+    a: "Usually 1 to 2 hours, if you already have your GitHub, AI agent tool, and Arrived event set up.",
   },
   {
     q: "Is there a deadline for building my custom page?",
-    a: "Yes. We get a lot of applications and review designers on a rolling basis, so your custom page needs to be finished about 2/3 days. Pick the day that works for you and ask our team for access before it.",
+    a: "No. We review applications on a rolling basis, so you can take your time.",
   },
   {
     q: "Can I build a custom page on the free plan?",
@@ -33,7 +33,7 @@ const ITEMS = [
   },
   {
     q: "Who do I contact for questions?",
-    a: "Email designpartners@teamhappily.com. Partners also get a shared Slack channel and monthly office hours once they are onboarded.",
+    a: "Email designpartners@teamhappily.com. Partners also get a shared Discord and monthly office hours once they are onboarded.",
   },
 ];
 

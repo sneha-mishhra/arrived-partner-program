@@ -46,7 +46,7 @@ const BENEFITS = [
   },
   {
     title: "Priority support",
-    body: "Direct line to our engineering and design team. Slack channel, monthly office hours, fast issue resolution.",
+    body: "Direct line to our engineering and design team. Discord, monthly office hours, fast issue resolution.",
     mark: "scatter",
     color: "var(--p-chip-green)",
   },
