@@ -40,13 +40,13 @@ function PixelMark({ mark, color }: { mark: string; color: string }) {
 const BENEFITS = [
   {
     title: "Revenue share",
-    body: "Get paid on every brief. Rising partners earn a set share. Trusted and Signature earn more per project.",
+    body: "Get paid on every brief, guaranteed. Rising partners earn a set share. Trusted and Signature earn more per project.",
     mark: "block",
     color: "var(--p-ink)",
   },
   {
     title: "Priority support",
-    body: "Direct line to our engineering and design team. Discord, monthly office hours, fast issue resolution.",
+    body: "Direct line to our engineering and design team. Your emails and Discord messages get prioritized.",
     mark: "scatter",
     color: "var(--p-chip-green)",
   },
